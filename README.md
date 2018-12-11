@@ -9,4 +9,4 @@ Meant to accompany a confluence page describing how to name stuff.
 - Device name builder
 
 # Regex tool link.
-https://regex101.com/r/x0KTl9/5
+https://regex101.com/r/x0KTl9/
