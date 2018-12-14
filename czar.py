@@ -7,6 +7,9 @@ def describe(Name):
         Returns a dictionary of all the elements of a well formed name.
 
         Raises a ValueError if the name doesn't conform (ie. doesn't match the regex).
+
+        ### Increments
+        May come with zero padding. Strip and convert as you like.
         '''
         match = re.search(pattern, Name)
 
@@ -21,9 +24,9 @@ def name(NameDict):
         '''
         Returns a properly formatted device name from a dictionary.
 
-        Dictionary must include all elements of a name, omitted increments will be set to 01.
+        Dictionary must include all elements of a name, omitted increments will be set to 01. <todo>
         '''
-        theName = """{functionalClass}{functionalIncrement}{beamPath}:{fungibleTaxon}:{componentTaxon}:{componentIncrement}:{processVariable}""".format(
+        theName = """{functionalClass}{functionalIncrement}{beamPath}:{fungibleTaxon}:{component}:{componentIncrement}:{elementTaxon}""".format(
                 **NameDict
         )
 
@@ -39,6 +42,8 @@ def human_readable(Name):
         humanReadableDescription = '''This name refers to the {componentIncrementTranslated} {componentTaxonTranslated}'''.format(
                 **NameDict
         )
+
+        #This will take a bit more work to really pull off
 
         return humanReadableDescription
 
