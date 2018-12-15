@@ -1,0 +1,10 @@
+language: python
+python:
+  - "3.6"
+
+install:
+  - pip install -Ur test-requirements.txt
+
+script: 
+  - export PYTHONPATH=$TRAVIS_BUILD_DIR
+  - pytest -vv tests/
