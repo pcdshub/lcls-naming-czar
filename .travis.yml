@@ -8,3 +8,4 @@ install:
 script: 
   - export PYTHONPATH=$TRAVIS_BUILD_DIR
   - pytest -vv tests/
+  - flake8 .
