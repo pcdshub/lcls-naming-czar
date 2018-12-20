@@ -4,9 +4,9 @@ pattern = re.compile(
         r"^(?P<functionalTaxon>(?P<functionalClass>\w{2})"
         r"(?P<functionalIncrement>\d{1,})"
         r"(?P<beamPath>\w{1,}\d{0,}\w{0,})):"
-        r"(?P<fungibleTaxon>.{3,})?(?(fungibleTaxon):|)"
-        r"(?P<component>\w{3}):(?P<componentIncrement>\d{2,3}|[X,Y,Z]):"
-        r"(?P<elementTaxon>[\w|\d]+$)")
+        r"(?P<fungibleTaxon>.{3,}?):"
+        r"(?P<component>.{3,}?)"
+        r"($|:(?P<auxiliaryPV>.{3,})$)")
 
 
 def describe(Name):
@@ -37,11 +37,9 @@ def name(NameDict):
         Dictionary must include all elements of a name, omitted increments
          will be set to 01. <todo>
         '''
-        theName = '{functionalClass}{functionalIncrement}{beamPath}:\
-        {fungibleTaxon}:{component}:{componentIncrement}:\
-        {elementTaxon}'.format(
-                **NameDict
-        )
+        theName = '{functionalClass}{functionalIncrement}{beamPath}:' \
+                  '{fungibleTaxon}:{component}:{auxiliaryPV}'.format(
+                        **NameDict)
 
         if re.search(pattern, theName) is None:
                 raise ValueError
