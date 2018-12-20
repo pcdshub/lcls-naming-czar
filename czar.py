@@ -1,12 +1,21 @@
 import re
 
-pattern = re.compile(r'^(?P<functionalTaxon>(?P<functionalClass>\w{2})(?P<functionalIncrement>\d{1,})(?P<beamPath>\w{1,}\d{0,}\w{0,})):(?P<fungibleTaxon>.{3,})?(?(fungibleTaxon):|)(?P<component>\w{3}):(?P<componentIncrement>\d{2,3}|[X,Y,Z]):(?P<elementTaxon>[\w|\d]+$)')
+pattern = re.compile(
+        r"^(?P<functionalTaxon>(?P<functionalClass>\w{2})"
+        r"(?P<functionalIncrement>\d{1,})"
+        r"(?P<beamPath>\w{1,}\d{0,}\w{0,})):"
+        r"(?P<fungibleTaxon>.{3,})?(?(fungibleTaxon):|)"
+        r"(?P<component>\w{3}):(?P<componentIncrement>\d{2,3}|[X,Y,Z]):"
+        r"(?P<elementTaxon>[\w|\d]+$)")
+
 
 def describe(Name):
+
         '''
         Returns a dictionary of all the elements of a well formed name.
 
-        Raises a ValueError if the name doesn't conform (ie. doesn't match the regex).
+        Raises a ValueError if the name doesn't conform (ie. doesn't
+         match the regex).
 
         ### Increments
         May come with zero padding. Strip and convert as you like.
@@ -20,31 +29,35 @@ def describe(Name):
 
         return NameDict
 
+
 def name(NameDict):
         '''
         Returns a properly formatted device name from a dictionary.
 
-        Dictionary must include all elements of a name, omitted increments will be set to 01. <todo>
+        Dictionary must include all elements of a name, omitted increments
+         will be set to 01. <todo>
         '''
-        theName = """{functionalClass}{functionalIncrement}{beamPath}:{fungibleTaxon}:{component}:{componentIncrement}:{elementTaxon}""".format(
+        theName = '{functionalClass}{functionalIncrement}{beamPath}:\
+        {fungibleTaxon}:{component}:{componentIncrement}:\
+        {elementTaxon}'.format(
                 **NameDict
         )
 
-        if re.search(pattern, theName) == None:
+        if re.search(pattern, theName) is None:
                 raise ValueError
 
         return theName
+
 
 def human_readable(Name):
         '''Produce a human-readable description of the name'''
 
         NameDict = describe(Name)
-        humanReadableDescription = '''This name refers to the {componentIncrementTranslated} {componentTaxonTranslated}'''.format(
+        humanReadableDescription = '''This name refers to the \
+        {componentIncrementTranslated} {componentTaxonTranslated}'''.format(
                 **NameDict
         )
 
-        #This will take a bit more work to really pull off
+        # This will take a bit more work to really pull off
 
         return humanReadableDescription
-
-
