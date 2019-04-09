@@ -1,7 +1,7 @@
 import czar
 import pytest
 expectedKeys = ['functionalTaxon', 'functionalClass', 'functionalIncrement',
-'beamPath', 'fungibleTaxon', 'component', 'componentIncrement', 'elementTaxon']
+'beamPath', 'fungibleTaxon', 'component', 'componentIncrement', 'auxiliaryPV']
 
 testName = 'EM1K2:GEM:VGC:02:OPN_REQ'
 badName = 'XLEM1K2G:GEM:VGC:02:OPN_REQ'
@@ -28,7 +28,7 @@ def test_one_works_with_the_other():
     ("fungibleTaxon", "GEM"),
     ("component", "VGC"),
     ("componentIncrement", "02"),
-    ("elementTaxon", "OPN_REQ")
+    ("auxiliaryPV", "OPN_REQ")
 ])
 def test_describe_parse_functionalTaxon(key, thing):
     assert czar.describe(testName)[key] == thing

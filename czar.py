@@ -1,6 +1,6 @@
 import re
 
-pattern = re.compile(r'^(?P<functionalTaxon>(?P<functionalClass>\w{2})(?P<functionalIncrement>\d{1,})(?P<beamPath>\w{1,}\d{0,}\w{0,})):(?P<fungibleTaxon>.{3,})?(?(fungibleTaxon):|)(?P<component>\w{3}):(?P<componentIncrement>\d{2,3}|[X,Y,Z]):(?P<elementTaxon>[\w|\d]+$)')
+pattern = re.compile(r'^(?P<functionalTaxon>(?P<functionalClass>\w{2})(?P<functionalIncrement>\d{1,})(?P<beamPath>\w{1,}\d{0,}\w{0,})):((?P<fungibleTaxon>[\w\d_]{3,}):|)(?P<component>\w{3,}?):?(?P<componentIncrement>\d*)($|:(?P<auxiliaryPV>.{3,})$)')
 
 def describe(Name):
         '''
@@ -26,7 +26,7 @@ def name(NameDict):
 
         Dictionary must include all elements of a name, omitted increments will be set to 01. <todo>
         '''
-        theName = """{functionalClass}{functionalIncrement}{beamPath}:{fungibleTaxon}:{component}:{componentIncrement}:{elementTaxon}""".format(
+        theName = """{functionalClass}{functionalIncrement}{beamPath}:{fungibleTaxon}:{component}:{componentIncrement}:{auxiliaryPV}""".format(
                 **NameDict
         )
 
