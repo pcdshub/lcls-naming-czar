@@ -3,10 +3,10 @@ import re
 
 pattern = re.compile(r"^(?P<functionalTaxon>(?P<functionalClass>\w{2})"
                         r"(?P<functionalIncrement>\d{1,})"
-                        r"(?P<beamPath>\w{1,}\d{0,}\w{0,}))[:-]"
+                        r"(?P<beamPath>[A-Z]{1,}\d{0,}\w{0,}))[:-]"
                         r"((?P<fungibleTaxon>[\w\d_]{3,})[:-]|)"
                         r"(?P<component>\w{3,}?)[-:]?(?P<componentIncrement>\d*)"
-                        r"($|[:-](?P<auxiliaryPV>.{3,})$)")
+                        r"($|[:-](?P<auxiliaryPV>[\w\d_]{3,})$)")
 
 
 def describe(Name):
